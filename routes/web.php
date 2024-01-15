@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CustomerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,13 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('/customers', [CustomerController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('customers.index');
+Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
+Route::resource('customers', CustomerController::class);
+
 
 
 

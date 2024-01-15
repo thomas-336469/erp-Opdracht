@@ -30,26 +30,6 @@ class CreateClientInformationTable extends Migration
             $table->string('function')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('client_id')->constrained();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->timestamps();
-        });
-
-        Schema::create('conversations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('client_id')->constrained();
-            $table->date('conversation_date');
-            $table->time('conversation_time');
-            $table->string('spoken_with');
-            $table->text('note')->nullable();
-            $table->timestamps();
-        });
     }
 
     /**
