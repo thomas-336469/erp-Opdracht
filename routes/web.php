@@ -29,7 +29,10 @@ Route::get('/customers', [CustomerController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('customers.index');
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-Route::resource('customers', CustomerController::class);
+Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+Route::get('customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+Route::put('customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
+
 
 
 

@@ -23,6 +23,7 @@
                         <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">Email</th>
                         <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">Phone Number</th>
                         <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">Function</th>
+                        <th class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,9 @@
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->email }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->phone_number }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->function }}</td>
+                        <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">
+                            <a href="{{ route('customers.edit', $customer->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

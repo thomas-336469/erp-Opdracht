@@ -45,10 +45,7 @@ class CustomerController extends Controller
     {
         return view('customers.show', compact('customer'));
     }
-    public function edit(Client $customer)
-    {
-        return view('customers.edit', compact('customer'));
-    }
+
     public function update(Request $request, Client $customer)
     {
         $request->validate([
