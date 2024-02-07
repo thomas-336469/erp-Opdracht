@@ -15,7 +15,7 @@
                     <div class="mt-4">
                         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                Total Clients
+                                Total Customers
                             </h3>
                             <p class="text-xl font-bold text-indigo-600 dark:text-indigo-400">
                                 {{ $totalClients }}

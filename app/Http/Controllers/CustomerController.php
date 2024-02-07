@@ -14,12 +14,20 @@ class CustomerController extends Controller
 
         return view('customers.index', compact('customers'));
     }
+
     public function create()
     {
         return view('customers.create');
     }
+
+    public function edit(Client $customer)
+    {
+        return view('customers.edit', compact('customer'));
+    }
+
     public function store(Request $request)
     {
+
         $request->validate([
             'user_id' => 'required',
             'company_name' => 'nullable|string',
@@ -41,15 +49,18 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')->with('success', 'Customer created successfully');
     }
 
-    public function show(Client $customer)
+    public function show($id)
     {
+        $customer = Client::findOrFail($id);
+
         return view('customers.show', compact('customer'));
     }
 
     public function update(Request $request, Client $customer)
     {
+
         $request->validate([
-            'user_id' => 'required',
+            'company' => 'required',
             'company_name' => 'nullable|string',
             'kvk_number' => 'nullable|string',
             'first_name' => 'required|string',
@@ -63,8 +74,20 @@ class CustomerController extends Controller
             'function' => 'nullable|string',
         ]);
 
-        $customer->update($request->all());
-
+        $customer->update([
+            'company' => $request->company,
+            'company_name' => $request->company_name,
+            'kvk_number' => $request->kvk_number,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'street' => $request->street,
+            'house_number' => $request->house_number,
+            'postcode' => $request->postcode,
+            'city' => $request->city,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'function' => $request->function,
+        ]);
         return redirect()->route('customers.index')->with('success', 'Customer updated successfully');
     }
     public function destroy(Client $customer)

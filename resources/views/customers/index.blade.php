@@ -29,8 +29,10 @@
                 <tbody>
                     @foreach($customers as $customer)
                     <tr class="bg-blue-500 text-white">
+                        <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">
+                            <a href="{{ route('customers.show', $customer->id) }}">{{ $customer->company_name }}</a>
+                        </td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->company }}</td>
-                        <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->company_name }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->kvk_number }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->first_name }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->last_name }}</td>
@@ -42,6 +44,11 @@
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->phone_number }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">{{ $customer->function }}</td>
                         <td class="py-2 px-4 border-b border-gray-300 dark:border-gray-100 text-white">
+                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                            </form>
                             <a href="{{ route('customers.edit', $customer->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>
                         </td>
                     </tr>
@@ -49,4 +56,5 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </x-app-layout>

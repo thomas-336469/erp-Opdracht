@@ -12,11 +12,10 @@ class ClientSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Adjust the number based on how many clients you want to seed
         for ($i = 0; $i < 10; $i++) {
             $isCompany = $faker->boolean;
             $client = Client::create([
-                'user_id' => 2, // Assuming a user with ID 1 is the owner of these clients
+                'user_id' => 2,
                 'company' => $isCompany,
                 'company_name' => $faker->company,
                 'kvk_number' => $faker->randomNumber(8),

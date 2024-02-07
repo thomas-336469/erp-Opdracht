@@ -4,10 +4,13 @@
     </x-slot>
 
     <div class="container mx-auto mt-6">
-        <form method="POST" action="{{ route('customers.update', $customer->id) }}">
+        <form action="{{ route('customers.update', $customer->id) }}" method="POST">
             @csrf
             @method('PUT')
-
+            <div class="mb-4">
+                <label for="company" class="block text-white">Company</label>
+                <input type="text" name="company" id="company" value="{{ $customer->company }}" class="form-input mt-1 block w-full" />
+            </div>
             <div class="mb-4">
                 <label for="company_name" class="block text-white">Company Name</label>
                 <input type="text" name="company_name" id="company_name" value="{{ $customer->company_name }}" class="form-input mt-1 block w-full" />
