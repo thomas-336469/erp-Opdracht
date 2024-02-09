@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ConversationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +29,19 @@ Route::get('/dashboard', [DashboardController::class, 'showDashboard'])
 Route::get('/customers', [CustomerController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('customers.index');
-// Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-// Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
-// Route::put('customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
-// Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
-// Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 Route::resource('customers', CustomerController::class);
 
+Route::resource('contacts', ContactController::class);
+Route::get('/contacts/create/{client_id}', [ContactController::class, 'create'])->name('contacts.create');
+Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+Route::patch('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
-
+Route::resource('conversations', ConversationController::class);
+Route::get('/conversations/create/{client_id}', [ConversationController::class, 'create'])->name('conversations.create');
+Route::get('/conversations/{conversation}/edit', [ConversationController::class, 'edit'])->name('conversations.edit');
+Route::patch('/conversations/{conversation}', [ConversationController::class, 'update'])->name('conversations.update');
+Route::delete('/conversations/{conversation}', [ConversationController::class, 'destroy'])->name('conversations.destroy');
 
 
 Route::middleware('auth')->group(function () {

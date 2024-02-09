@@ -24,28 +24,71 @@
                 <p class="text-sm text-gray-500">{{ $customer->email }}</p>
                 <p class="text-sm text-gray-500">{{ $customer->phone_number }}</p>
             </div>
-
             {{-- Display connected contacts --}}
             <div class="p-6 text-white">
                 <h3 class="text-lg font-semibold mb-4">Connected Contacts</h3>
                 <ul>
                     @foreach($customer->contacts as $contact)
-                    <li>{{ $contact->name }} - {{ $contact->email }}</li>
+                    <li class="mb-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-lg font-semibold">{{ $contact->first_name }} {{ $contact->last_name }}</p>
+                                <p class="text-gray-500">E-mail: {{ $contact->email }}</p>
+                                <p class="text-gray-500">Phone: {{ $contact->phone }}</p>
+                            </div>
+                            <div class="flex">
+                                {{-- Edit button --}}
+                                <a href="{{ route('contacts.edit', $contact->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>
+                                {{-- Delete button --}}
+                                <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST" class="ml-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
             </div>
+
+            {{-- Add contact button --}}
+            <div class="p-6 text-white">
+                <a href="{{ route('contacts.create', ['client_id' => $customer->id]) }}" class="bg-blue-500 text-white px-4 py-2 rounded">Add Contact</a>
+            </div>
+
 
             {{-- Display connected notes --}}
             <div class="p-6 text-white">
                 <h3 class="text-lg font-semibold mb-4">Connected Notes</h3>
                 <ul>
                     @foreach($customer->conversations as $conversation)
-                    <li>{{ $conversation->note }}</li>
+                    <li class="mb-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-lg font-semibold">Date: {{ $conversation->conversation_date }}</p>
+                                <p class="text-lg font-semibold">Time: {{ $conversation->conversation_time }}</p>
+                                <p class="text-lg font-semibold">Spoken with: {{ $conversation->spoken_with }}</p>
+                                <p class="text-gray-500">Note: {{ $conversation->note }}</p>
+                            </div>
+                            <div class="flex">
+                                {{-- Edit button --}}
+                                <a href="{{ route('conversations.edit', $conversation->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>
+                                {{-- Delete button --}}
+                                <form action="{{ route('conversations.destroy', $conversation->id) }}" method="POST" class="ml-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
             </div>
+            {{-- Add button to create note --}}
+            <div class="p-6 text-white">
+                <a href="{{ route('conversations.create', ['client_id' => $customer->id]) }}" class="bg-blue-500 text-white px-4 py-2 rounded">Add Contact</a>
+            </div>
 
-
-        </div>
-    </div>
 </x-app-layout>

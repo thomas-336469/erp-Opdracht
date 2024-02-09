@@ -52,7 +52,6 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Client::findOrFail($id);
-
         return view('customers.show', compact('customer'));
     }
 
